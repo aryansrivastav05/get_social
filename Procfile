@@ -1,1 +1,1 @@
-web: gunicorn PostX.wsgi:application --bind 0.0.0.0:$PORT
+web: gunicorn PostX.PostX.PostX.wsgi
