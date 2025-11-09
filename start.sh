@@ -1,1 +1,2 @@
-gunicorn PostX.wsgi
+#!/usr/bin/env bash
+gunicorn PostX.PostX.wsgi
