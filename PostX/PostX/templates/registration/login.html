@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="form-container">
+  <h2 class="card-title" style="font-size:1.5rem;margin-bottom:1.5rem">Welcome Back</h2>
+  
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.errors %}
+        <div class="error" style="color:var(--danger);font-size:0.875rem;margin-top:0.25rem">
+          {{ field.errors.0 }}
+        </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+    
+    <div style="margin-top:1.5rem">
+      <button class="btn btn-primary" type="submit" style="width:100%">Sign In</button>
+    </div>
+  </form>
+
+  <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+    <div style="text-align:center;color:var(--text-light);font-size:0.875rem">
+      <a href="{% url 'password_reset' %}" style="color:var(--primary);text-decoration:none">Forgot your password?</a>
+    </div>
+    <div style="text-align:center;margin-top:1rem;font-size:0.875rem">
+      Don't have an account? 
+      <a href="{% url 'register' %}" style="color:var(--primary);text-decoration:none;font-weight:500">
+        Create one now
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .form-container {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .form-group input {
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    height: 2.75rem;
+    font-size: 1rem;
+    justify-content: center;
+  }
+</style>
+{% endblock %}

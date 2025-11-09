@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="card-title" style="font-size:1.5rem;margin-bottom:1.5rem">Create Account</h2>
+    
+    {% if request.user.is_authenticated %}
+        <div class="message-box" style="text-align:center;padding:1rem">
+            <p style="margin-bottom:1rem">
+                You are already registered as 
+                <strong style="color:var(--primary)">{{ request.user.username }}</strong>
+            </p>
+            <a href="{% url 'post_list' %}" class="btn btn-primary">Go to Posts</a>
+        </div>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <div class="help-text" style="color:var(--text-light);font-size:0.75rem;margin-top:0.25rem">
+                        {{ field.help_text }}
+                    </div>
+                {% endif %}
+                {% if field.errors %}
+                    <div class="error" style="color:var(--danger);font-size:0.875rem;margin-top:0.25rem">
+                        {{ field.errors.0 }}
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            
+            <div style="margin-top:1.5rem">
+                <button class="btn btn-primary" type="submit" style="width:100%">Create Account</button>
+            </div>
+        </form>
+
+        <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:0.875rem">
+            Already have an account? 
+            <a href="{% url 'login' %}" style="color:var(--primary);text-decoration:none;font-weight:500">
+                Sign in instead
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    .form-container {
+        animation: slideUp 0.3s ease-out;
+    }
+    
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    .form-group input {
+        height: 2.5rem;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        height: 2.75rem;
+        font-size: 1rem;
+        justify-content: center;
+    }
+
+    /* Password validation list styling */
+    .helptext {
+        color: var(--text-light);
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+    }
+
+    .helptext ul {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+    }
+
+    .helptext li {
+        margin: 0.25rem 0;
+        padding-left: 1.25rem;
+        position: relative;
+    }
+
+    .helptext li::before {
+        content: "•";
+        position: absolute;
+        left: 0.5rem;
+        color: var(--primary);
+    }
+</style>
+{% endblock %}
