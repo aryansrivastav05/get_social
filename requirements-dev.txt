@@ -1,0 +1,16 @@
+# Development / ML requirements (install locally on a machine with build toolchain)
+# Install these only in your dev environment, not in production hosting like Render
+
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.6.1
+matplotlib==3.10.7
+opencv-python==4.11.0.86
+dlib==19.24.2
+face-recognition==1.3.0
+face-recognition-models==0.3.0
+tensorflow==2.17.0
+keras==3.4.1
+
+# Many of these packages require system libraries (cmake, build-essential, libjpeg, etc.)
+# See README or local dev setup for installation instructions.
