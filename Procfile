@@ -1,1 +1,1 @@
-web: gunicorn PostX.PostX.PostX.wsgi
+web: gunicorn PostX.PostX.wsgi
